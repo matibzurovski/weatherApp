@@ -28,8 +28,7 @@ extension WeatherCondition {
 
 extension WeatherCondition {
     
-    var iconUrl: URL? {
-        let urlString = "https://openweathermap.org/img/wn/\(icon)@2x.png"
-        return URL(string: urlString)
+    var iconUrl: String {
+        return "https://openweathermap.org/img/wn/\(icon)@2x.png"
     }
 }

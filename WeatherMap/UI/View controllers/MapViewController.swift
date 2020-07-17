@@ -118,10 +118,10 @@ extension MapViewController: LocationControllerDelegate {
 // MARK: - WeatherControllerDelegate
 extension MapViewController: WeatherControllerDelegate {
 
-    func weatherController(_ controller: WeatherController, didObtainWeather weather: WeatherResponse) {
+    func weatherController(_ controller: WeatherController, didObtainWeather weather: WeatherInfo) {
         hideLoadingIndicator()
         
-        let vc = WeatherViewController(response: weather)
+        let vc = WeatherViewController(info: weather)
         present(vc, animated: true)
     }
     

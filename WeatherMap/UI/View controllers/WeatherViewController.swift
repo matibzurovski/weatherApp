@@ -17,10 +17,10 @@ class WeatherViewController: UIViewController {
     @IBOutlet fileprivate weak var feelsLikeLabel: UILabel!
     @IBOutlet fileprivate weak var daysTableView: UITableView!
     
-    fileprivate let response: WeatherResponse
+    fileprivate let info: WeatherInfo
     
-    init(response: WeatherResponse) {
-        self.response = response
+    init(info: WeatherInfo) {
+        self.info = info
         super.init(nibName: "WeatherViewController", bundle: .main)
     }
     
@@ -39,14 +39,12 @@ class WeatherViewController: UIViewController {
 fileprivate extension WeatherViewController {
     
     func loadData() {
-        if let condition = response.current.conditions.first {
-            descriptionLabel.text = condition.main
-            if let url = condition.iconUrl {
-                iconImageView.af.setImage(withURL: url)
-            }
+        descriptionLabel.text = info.conditionDescription
+        if let url = URL(string: info.conditionIcon) {
+            iconImageView.af.setImage(withURL: url)
         }
-        temperatureLabel.text = "\(response.current.temperature)°"
-        feelsLikeLabel.text = "(feels like \(response.current.feelsLike)°)"
+        temperatureLabel.text = "\(info.temperature)°"
+        feelsLikeLabel.text = "(feels like \(info.feelsLike)°)"
     }
     
     func setUpTableView() {
@@ -61,7 +59,7 @@ fileprivate extension WeatherViewController {
 extension WeatherViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return response.daily.count
+        return info.days.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,7 +67,7 @@ extension WeatherViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let weather = response.daily[indexPath.row]
+        let weather = info.days[indexPath.row]
         cell.load(weather: weather)
         return cell
     }
