@@ -1,0 +1,5 @@
+**/.DS_Store
+**/Carthage
+/Flex/FlexApp/FlexApp.xcodeproj/xcuserdata/
+/Flex/FlexApp/FlexApp.xcodeproj/project.xcworkspace/xcuserdata/
+Breakpoints_v2.xcbkptlist

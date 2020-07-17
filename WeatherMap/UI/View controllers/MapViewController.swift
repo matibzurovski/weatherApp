@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MapViewController.swift
 //  WeatherMap
 //
 //  Created by Matias Bzurovski on 17/07/2020.
@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import MapKit
 
-class ViewController: UIViewController {
-
+class MapViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
 }
 
+fileprivate extension MapViewController {
+    
+    @IBAction func locationButtonAction(_ sender: Any) {
+    }
+}
