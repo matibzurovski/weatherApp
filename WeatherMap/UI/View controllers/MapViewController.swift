@@ -13,6 +13,7 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     @IBOutlet fileprivate(set) weak var mapView: MKMapView!
+    fileprivate var activityView: UIActivityIndicatorView?
     
     fileprivate let locationController = LocationController()
     fileprivate let weatherController = WeatherController()
@@ -58,11 +59,19 @@ fileprivate extension MapViewController {
     }
     
     private func showLoadingIndicator() {
-        
+        if activityView?.isAnimating ?? false {
+            return
+        }
+        let activityView = UIActivityIndicatorView(style: .large)
+        activityView.center = view.center
+        activityView.hidesWhenStopped = true
+        view.addSubview(activityView)
+        activityView.startAnimating()
+        self.activityView = activityView
     }
     
     private func hideLoadingIndicator() {
-        
+        activityView?.stopAnimating()
     }
 }
 
@@ -111,8 +120,9 @@ extension MapViewController: WeatherControllerDelegate {
 
     func weatherController(_ controller: WeatherController, didObtainWeather weather: WeatherResponse) {
         hideLoadingIndicator()
-        print(weather)
-        // present screen
+        
+        let vc = WeatherViewController(response: weather)
+        present(vc, animated: true)
     }
     
     func weatherController(_ controller: WeatherController, didFailWithError error: Error) {

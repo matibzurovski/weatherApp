@@ -11,8 +11,8 @@ import SwiftyJSON
 
 struct WeatherCondition {
     
-    /// The description of the weather condition.
-    let description: String
+    /// The main description of the weather condition.
+    let main: String
     
     /// The icon corresponding to this condition.
     let icon: String
@@ -21,7 +21,15 @@ struct WeatherCondition {
 extension WeatherCondition {
     
     init(json: JSON) {
-        description = json["description"].stringValue
+        main = json["main"].stringValue
         icon = json["icon"].stringValue
+    }
+}
+
+extension WeatherCondition {
+    
+    var iconUrl: URL? {
+        let urlString = "https://openweathermap.org/img/wn/\(icon)@2x.png"
+        return URL(string: urlString)
     }
 }

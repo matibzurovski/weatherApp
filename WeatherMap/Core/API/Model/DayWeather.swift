@@ -23,14 +23,18 @@ struct DayWeather {
     
     /// The temperature details for this day.
     let tempeature: TemperatureDetails
+    
+    /// The conditions of the weather
+    let conditions: [WeatherCondition]
 }
 
 extension DayWeather {
     
     init(json: JSON) {
-        date = Date(timeIntervalSinceReferenceDate: json["dt"].doubleValue)
+        date = Date(timeIntervalSince1970: json["dt"].doubleValue)
         sunrise = Date(timeIntervalSinceReferenceDate: json["sunrise"].doubleValue)
         sunset = Date(timeIntervalSinceReferenceDate: json["sunset"].doubleValue)
         tempeature = TemperatureDetails(json: json["temp"])
+        conditions = json["weather"].arrayValue.compactMap { WeatherCondition(json: $0) }
     }
 }

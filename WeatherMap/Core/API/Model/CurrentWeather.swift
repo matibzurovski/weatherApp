@@ -15,10 +15,10 @@ struct CurrentWeather {
     /// The temperature in Fahrenheit.
     let temperature: Double
     
-    /// The human perception of the temperature
+    /// The human perception of the temperature.
     let feelsLike: Double
     
-    /// The conditions of the weather
+    /// The conditions of the weather.
     let conditions: [WeatherCondition]
 }
 
