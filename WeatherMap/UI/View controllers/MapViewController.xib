@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="WeatherMap" customModuleProvider="target">
             <connections>
+                <outlet property="lastWeatherButton" destination="WNL-nH-9uG" id="bdw-9N-AkU"/>
                 <outlet property="mapView" destination="etQ-5U-iWb" id="ViP-pV-AHe"/>
                 <outlet property="view" destination="iN0-l3-epB" id="JNv-E2-2aS"/>
             </connections>
@@ -39,18 +40,33 @@
                         <action selector="locationButtonAction:" destination="-1" eventType="touchUpInside" id="bDT-cY-TsI"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNL-nH-9uG">
+                    <rect key="frame" x="12" y="73" width="148" height="30"/>
+                    <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="  Check last weather  "/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="lastWeatherAction:" destination="-1" eventType="touchUpInside" id="cHz-lb-kRs"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="C4B-ni-mtY" secondAttribute="trailing" constant="12" id="OC3-vR-IWP"/>
+                <constraint firstItem="WNL-nH-9uG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="Roq-PM-u85"/>
                 <constraint firstItem="C4B-ni-mtY" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="24" id="UBc-uL-5K6"/>
                 <constraint firstItem="etQ-5U-iWb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="WNN-sq-Vwc"/>
+                <constraint firstItem="C4B-ni-mtY" firstAttribute="centerY" secondItem="WNL-nH-9uG" secondAttribute="centerY" id="Ya4-G1-qhN"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="etQ-5U-iWb" secondAttribute="trailing" id="f1e-PC-Jzz"/>
                 <constraint firstItem="etQ-5U-iWb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="hLh-Xe-AUk"/>
                 <constraint firstAttribute="bottom" secondItem="etQ-5U-iWb" secondAttribute="bottom" id="rZ4-mm-7dl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="154"/>
+            <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
         </view>
     </objects>
     <resources>

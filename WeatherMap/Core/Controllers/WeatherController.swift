@@ -9,7 +9,7 @@
 import Foundation
 
 protocol WeatherControllerDelegate: class {
-    func weatherController(_ controller: WeatherController, didObtainWeather weather: WeatherInfo)
+    func weatherController(_ controller: WeatherController, didObtainWeather info: WeatherInfo)
     func weatherController(_ controller: WeatherController, didFailWithError error: Error)
 }
 
@@ -26,6 +26,16 @@ class WeatherController {
     }
     
     weak var delegate: WeatherControllerDelegate?
+    
+    // MARK: - Public
+    
+    var isCacheInfoAvailable: Bool {
+        return lastWeather != nil
+    }
+    
+    var lastWeather: WeatherInfo? {
+        return try? persistenceController.readAll(WeatherInfo.self).first
+    }
     
     func fetchWeather(latitude: Double, longitude: Double) {
         /// Prevent multiple requests at the same time, so that we don't overflood the API (which has some limitations for free users)
@@ -46,6 +56,8 @@ class WeatherController {
             }
         }
     }
+    
+    // MARK: - Private
     
     private func generateWeatherInfo(weather: WeatherResponse) -> WeatherInfo {
         var days: [DayWeatherInfo] = []

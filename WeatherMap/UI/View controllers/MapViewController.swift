@@ -13,6 +13,7 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     @IBOutlet fileprivate(set) weak var mapView: MKMapView!
+    @IBOutlet weak var lastWeatherButton: UIButton!
     fileprivate var activityView: UIActivityIndicatorView?
     
     fileprivate let locationController = LocationController()
@@ -23,12 +24,17 @@ class MapViewController: UIViewController {
         
         locationController.delegate = self
         weatherController.delegate = self
+        updateLastWeatherButtonVisibility()
         setUpGestureRecognizer()
     }
 }
 
 // MARK: - UI setup
 fileprivate extension MapViewController {
+    
+    func updateLastWeatherButtonVisibility() {
+        lastWeatherButton.isHidden = !weatherController.isCacheInfoAvailable
+    }
     
     func setUpGestureRecognizer() {
         /*
@@ -92,6 +98,16 @@ fileprivate extension MapViewController {
         locationController.start()
     }
     
+    @IBAction func lastWeatherAction(_ sender: Any) {
+        guard let info = weatherController.lastWeather else {
+            print("Unexpected tap to check last weather when no info was available")
+            return
+        }
+        
+        let vc = WeatherViewController(info: info)
+        present(vc, animated: true)
+    }
+    
 }
 
 // MARK: - LocationControllerDelegate
@@ -118,11 +134,12 @@ extension MapViewController: LocationControllerDelegate {
 // MARK: - WeatherControllerDelegate
 extension MapViewController: WeatherControllerDelegate {
 
-    func weatherController(_ controller: WeatherController, didObtainWeather weather: WeatherInfo) {
+    func weatherController(_ controller: WeatherController, didObtainWeather info: WeatherInfo) {
         hideLoadingIndicator()
         
-        let vc = WeatherViewController(info: weather)
+        let vc = WeatherViewController(info: info)
         present(vc, animated: true)
+        lastWeatherButton.isHidden = false
     }
     
     func weatherController(_ controller: WeatherController, didFailWithError error: Error) {
