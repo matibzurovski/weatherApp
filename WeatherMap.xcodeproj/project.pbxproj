@@ -15,6 +15,7 @@
 		233C9BD124C225A4001AE70A /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 233C9BD024C225A4001AE70A /* MapViewController.xib */; };
 		233C9BD324C225AE001AE70A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C9BD224C225AE001AE70A /* MapViewController.swift */; };
 		233C9BD524C226D1001AE70A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 233C9BD424C226D1001AE70A /* Main.storyboard */; };
+		233C9BDF24C23034001AE70A /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233C9BDE24C23034001AE70A /* LocationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		233C9BD024C225A4001AE70A /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		233C9BD224C225AE001AE70A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		233C9BD424C226D1001AE70A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		233C9BDE24C23034001AE70A /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		233C9BAC24C22471001AE70A /* WeatherMap */ = {
 			isa = PBXGroup;
 			children = (
+				233C9BDC24C23022001AE70A /* Core */,
 				233C9BCF24C22598001AE70A /* UI */,
 				233C9BAD24C22471001AE70A /* AppDelegate.swift */,
 				233C9BAF24C22471001AE70A /* SceneDelegate.swift */,
@@ -124,6 +127,22 @@
 				233C9BD224C225AE001AE70A /* MapViewController.swift */,
 			);
 			path = "View controllers";
+			sourceTree = "<group>";
+		};
+		233C9BDC24C23022001AE70A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				233C9BDD24C23026001AE70A /* Controllers */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		233C9BDD24C23026001AE70A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				233C9BDE24C23034001AE70A /* LocationController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				233C9BDF24C23034001AE70A /* LocationController.swift in Sources */,
 				233C9BAE24C22471001AE70A /* AppDelegate.swift in Sources */,
 				233C9BD324C225AE001AE70A /* MapViewController.swift in Sources */,
 				233C9BB024C22471001AE70A /* SceneDelegate.swift in Sources */,
