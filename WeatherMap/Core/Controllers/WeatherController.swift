@@ -85,3 +85,13 @@ class WeatherController {
         }
     }
 }
+
+private extension Date {
+    
+    var dayOfWeek: String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "EEEE"
+        return dateformatter.string(from: self)
+    }
+}
+

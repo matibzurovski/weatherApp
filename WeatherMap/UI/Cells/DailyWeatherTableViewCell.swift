@@ -25,12 +25,3 @@ class DailyWeatherTableViewCell: UITableViewCell {
         temperatureLabel.text = "\(weather.minTemperature)° - \(weather.maxTemperature)°"
     }
 }
-
-extension Date {
-    
-    var dayOfWeek: String {
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "EEEE"
-        return dateformatter.string(from: self)
-    }
-}
