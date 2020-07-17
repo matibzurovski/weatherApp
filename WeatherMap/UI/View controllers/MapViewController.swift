@@ -15,9 +15,54 @@ class MapViewController: UIViewController {
     @IBOutlet fileprivate(set) weak var mapView: MKMapView!
     
     fileprivate let locationController = LocationController()
+    fileprivate let weatherController = WeatherController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationController.delegate = self
+        weatherController.delegate = self
+        setUpGestureRecognizer()
+    }
+}
+
+// MARK: - UI setup
+fileprivate extension MapViewController {
+    
+    func setUpGestureRecognizer() {
+        /*
+         NOTE: I've decided to change a little bit the requirement, and instead of showing the weather info
+         after two taps on a location, I decided to make it after one long press gesture. This is because the
+         double tap is used to zoom in the map, and I think it is better to leave that default behavior.
+         As a future enhancement, we could add special annotations to the map that could be easily tapped to fetch
+         the weather information on such place.
+         
+         This is how the code would look for the double taps requirement.
+         
+         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(sender:)))
+         tapGesture.numberOfTapsRequired = 2
+        */
+        
+        let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleDoubleTap(sender:)))
+        mapView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleDoubleTap(sender: Any) {
+        guard let gesture = sender as? UILongPressGestureRecognizer else { return }
+        
+        let tapPoint = gesture.location(in: mapView)
+        let coordinate = mapView.convert(tapPoint, toCoordinateFrom: mapView)
+        
+        showLoadingIndicator()
+        weatherController.fetchWeather(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+    
+    private func showLoadingIndicator() {
+        
+    }
+    
+    private func hideLoadingIndicator() {
+        
     }
 }
 
@@ -59,6 +104,24 @@ extension MapViewController: LocationControllerDelegate {
         alert.addAction(openSettingsAction)
         present(alert, animated: true)
     }
+}
+
+// MARK: - WeatherControllerDelegate
+extension MapViewController: WeatherControllerDelegate {
+
+    func weatherController(_ controller: WeatherController, didObtainWeather weather: WeatherResponse) {
+        hideLoadingIndicator()
+        print(weather)
+        // present screen
+    }
     
-    
+    func weatherController(_ controller: WeatherController, didFailWithError error: Error) {
+        hideLoadingIndicator()
+        
+        /// We aren't going to show the `error.localizedDescription` to the user because it is a third party library and we don't know how user friendly its errors are..
+        let alert = UIAlertController(title: "Ooopss..", message: "We haven't been able to fetch the weather for the selected location. Please try again!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
 }
